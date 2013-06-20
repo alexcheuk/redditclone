@@ -1,0 +1,97 @@
+<!doctype html>
+<html ng-app="login">
+<head>
+	<title>Reddit Clone</title>
+	<link rel="stylesheet" type="text/css" href="css/reset.css">
+	<link rel="stylesheet" type="text/css" href="css/global.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.0/css/font-awesome.css" rel="stylesheet">
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
+	<script src="ng/ng-login.js"></script>
+</head>
+<body>
+	<div class="logo">
+		<img src="images/logo.png" width="180"/>
+		<h1 class="logo__title">REDDIT CLONE</h1>
+	</div>
+
+	<div class="flip-box login-flipbox" ng-class="{flip: flip==true}">
+		<div class="auth-box group back">
+			<div id="gplus-login-btn" class="form-btn">Login with Google</div>
+
+			<fieldset class="box-line-div"><legend>or</legend></fieldset>
+
+			<div class="auth-form group" ng-controller="LoginForm">
+				<label>Username / Email</label>
+				<div class="inputs-icon">
+					<input type="text" ng-model="namer"/>
+					<div class="inputs-icon__icon"><i class="icon-user"></i></div>
+				</div>
+
+				<label>Password</label>
+				<div class="inputs-icon">
+					<input type="text"/>
+					<div class="inputs-icon__icon"><i class="icon-lock"></i></div>
+				</div>
+
+				<div class="login-submit form-btn form-btn--inline">Login</div>
+				<div class="login-register-btn" ng-click="flipForm()">Sign up for Reddit Clone</div>
+			</div>
+		</div>
+
+		<div class="auth-box group front">
+			<div id="gplus-login-btn" class="form-btn">Sign Up with Google</div>
+
+			<fieldset class="box-line-div"><legend>or</legend></fieldset>
+
+			<div class="auth-form group" ng-controller="RegistrationFormCtrl">
+				<form name="RegistrationForm" novalidate>
+					<label>Your Name</label>
+					<div class="inputs-icon">
+						<input type="text" id="input-signup-fullname" ng-model="signup.full_name" name="full_name" required>
+						<div class="inputs-icon__icon"><i class="icon-user"></i></div>
+
+						<div class="inputs-icon__msg inputs-icon__msg--error" ng-show="RegistrationForm.full_name.$error.required && RegistrationForm.full_name.$dirty" >Required</div>
+						<div class="inputs-icon__msg" ng-show="RegistrationForm.full_name.$valid">Okay</div>
+					</div>
+
+					<label>Email Address</label>
+					<div class="inputs-icon">
+						<input type="text" id="input-signup-email" ng-model="signup.email" name="email" unique-email required/>
+
+						<div class="inputs-icon__icon"><i class="icon-envelope"></i></div>
+						
+						<div class="inputs-icon__msg inputs-icon__msg--error" ng-show="RegistrationForm.email.$error.uniqueEmail && RegistrationForm.email.$viewValue.length" >Email is taken</div>
+						
+						<div class="inputs-icon__msg inputs-icon__msg--error" ng-show="RegistrationForm.email.$error.validEmail && RegistrationForm.email.$viewValue.length" >Invalid Email</div>
+						
+						<div class="inputs-icon__msg" ng-show="RegistrationForm.email.$error.uniqueEmail == false && RegistrationForm.email.$error.validEmail == false" >Email is available</div>
+						
+						<div class="inputs-icon__msg inputs-icon__msg--error" ng-show="RegistrationForm.email.$error.required && RegistrationForm.email.$dirty" >Required</div>
+					</div>
+
+					<label>Password</label>
+					<div class="inputs-icon">
+						<input type="password" id="input-signup-password" ng-model="signup.password" name="password" required ng-minlength="6">
+						<div class="inputs-icon__icon"><i class="icon-lock"></i></div>
+						<div class="inputs-icon__msg inputs-icon__msg--error" ng-show="RegistrationForm.password.$error.required && RegistrationForm.password.$dirty">Required</div>
+						<div class="inputs-icon__msg inputs-icon__msg--error" ng-show="RegistrationForm.password.$error.minlength" >Requires 6+ characters</div>
+						<div class="inputs-icon__msg" ng-show="RegistrationForm.password.$valid">Okay</div>
+					</div>
+
+					<div class="signup-submit form-btn form-btn--inline" ng-click="submit()">Register and Login</div>
+					<div class="cancel-signup form-btn form-btn--inline" ng-click="flipForm()">Cancel</div>
+				</form>
+			</div>
+
+		</div>
+	</div>
+
+	<!-- SCRIPTS / JS -->
+	<script src="https://apis.google.com/js/plusone.js"></script>
+	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+	<script src="js/main.js"></script>
+</body>
+</html>
